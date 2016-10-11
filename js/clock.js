@@ -4,17 +4,16 @@ function Clock() {
   this.alarmActive = false;
 }
 
-Clock.prototype.turnOnAlarm = function() {
-  this.alarmOn = true;
-  setInterval(this.compareTimes, 1000);
-  }
-
-
-Clock.prototype.compareTimes = function(time) {
-
-  if (time === this.alarmTime) {
+Clock.prototype.compareTimes = function() {
+  if (moment().format("hh:mm") === this.alarmTime) {
     this.alarmActive = true;
   }
 }
+
+Clock.prototype.turnOnAlarm = function(alarm) {
+  this.alarmTime = alarm;
+  this.alarmOn = true;
+  setInterval(this.compareTimes, 10000);
+  }
 
 exports.clockModule = Clock;
